@@ -1,22 +1,15 @@
 describe ('Página Inicial', () => {  
- // before(() => {
-  //  cy.viewport(1920, 1080)
- // })
-
-//carrega o site
   beforeEach(() => {
     cy.viewport(1920, 1080)
     cy.visit('https://www.essentialnutrition.com.br/politica-de-frete')
   })
 
   it("Titulo", () => {
-    //cy.visit('https://www.essentialnutrition.com.br/politica-de-frete')
     cy.contains("POLÍTICA DE FRETE GRÁTIS* ESSENTIAL NUTRITION")
 
   })
 
   it("primeiro parfagrafo", () => {
-  //  cy.visit('https://www.essentialnutrition.com.br/politica-de-frete')
     cy.contains("Comprando no nosso site, além da agilidade na entrega, você ainda pode ganhar frete")
 
   })
