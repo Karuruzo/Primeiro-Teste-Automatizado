@@ -1,25 +1,32 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('loginBasicAuthBase64', () => {
+    const username = 'stagingnoor';
+    const password = 'sG1{eM0^qJ9_gI6%';
+
+    // Codifica o username:password em Base64
+    const authString = btoa(`${username}:${password}`);
+
+    // Usa intercept para modificar as requisições feitas pelo cy.visit()
+    cy.intercept('GET', 'https://staging.noorskin.com.br', (req) => {
+        req.headers['Authorization'] = `Basic ${authString}`;
+    }).as('authRequest');
+
+    // Ignora erros não capturados para evitar falhas de testes por erros da aplicação
+    Cypress.on('uncaught:exception', (err, runnable) => {
+        // Retorna false para que o Cypress ignore erros não capturados
+        return false;
+    });
+
+    // Faz a navegação com o intercept ativo
+    cy.viewport(1920, 1080);
+    cy.visit('https://staging.noorskin.com.br');
+
+    // Espera a interceptação ser concluída
+    cy.wait('@authRequest').then((interception) => {
+        cy.log('Interceptação de autenticação completa');
+    });
+});
+
+Cypress.Commands.add('loginjusto', () => {
+    cy.visit('https://www.essentialnutrition.com.br/')
+
+})
