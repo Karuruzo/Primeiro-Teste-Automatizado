@@ -9,7 +9,7 @@ describe ('Página Inicial', () => {
 
   })
 
-  it("primeiro parfagrafo", () => {
+  it("Descrição correta", () => {
     cy.contains("Comprando no nosso site, além da agilidade na entrega, você ainda pode ganhar frete")
 
   })
