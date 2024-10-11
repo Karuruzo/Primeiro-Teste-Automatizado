@@ -4,3 +4,5 @@ describe('Página Inicial', () => {
     cy.contains('Example Domain')
   })
 })
+   
+
