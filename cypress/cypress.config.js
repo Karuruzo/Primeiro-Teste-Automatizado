@@ -8,6 +8,7 @@ module.exports = {
 module.exports = defineConfig({
   projectId: 'h386n1',
   e2e: {
+    browser: 'chrome',
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },

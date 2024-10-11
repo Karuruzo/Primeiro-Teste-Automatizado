@@ -1,5 +1,5 @@
 describe('Página Inicial', () => {
-  before(() => {
+  beforeEach(() => {
     cy.viewport(1920, 1080)
     cy.visit('https://www.essentialnutrition.com.br/radiance-joy-protein-bar-berries-white-chocolate-box')
   })
